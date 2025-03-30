@@ -69,7 +69,7 @@ public class Program
     {
         Node<int> pos= first;
         Node<int> insert = new(hadash);
-        while (pos.GetValue() < insert.GetValue())
+        while (pos.GetNext().GetValue() < insert.GetValue())
         {
             pos = pos.GetNext();
         }
