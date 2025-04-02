@@ -9,7 +9,7 @@ public class Program
         lst1 = currNode;
         currNode= new(8,lst1);
         lst1 = currNode;
-        currNode = new(6,lst1);
+        currNode = new(2,lst1);
         lst1 = currNode;
         currNode = new(5,lst1);
         lst1 = currNode;
@@ -22,7 +22,10 @@ public class Program
         Console.WriteLine("sum is:"+SumLinked(lst1));
         Console.WriteLine("amount of evens:"+ EvenInList(lst1));
         InsertSortedList(lst1,7);
+        lst1 = new(1, lst1);
         Console.WriteLine(lst1);
+        Console.WriteLine("size is: "+ SizeLst(lst1));
+        Console.WriteLine("is it perf: "+CheckPerfLst(lst1));
 
     }
     public static int SumLinked(Node<int> first)
@@ -75,6 +78,40 @@ public class Program
         }
         insert.SetNext(pos.GetNext());
         pos.SetNext(insert);
+    }
+    public static int SizeLst(Node<int> first)
+    {
+        Node<int> pos = first;
+        int size = 0;
+        while (pos != null)
+        {
+            size++;
+            pos = pos.GetNext();
+        }
+        return size;
+    }
+    public static bool CheckPerfLst(Node<int> first)
+    {
+        Node<int> last = first;
+        Node<int> pos = first;
+        for(int i = 0;i<SizeLst(first)/2; i++)
+        {
+            last = last.GetNext();
+        }
+        for (int i = 0; i<SizeLst(last)/2; i++)
+        {
+            for(int j = 0; j<SizeLst(last)/2; j++)
+            {
+                if(last.GetValue() < pos.GetValue())
+                {
+                    return false;
+                }
+                pos = pos.GetNext();
+            }
+            last = last.GetNext();
+            pos = first;
+        }
+        return true;
     }
 
 }
