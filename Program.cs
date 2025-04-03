@@ -98,9 +98,9 @@ public class Program
         {
             last = last.GetNext();
         }
-        for (int i = 0; i<SizeLst(last)/2; i++)
+        for (int i = 0; i<SizeLst(first)/2; i++)
         {
-            for(int j = 0; j<SizeLst(last)/2; j++)
+            for(int j = 0; j<SizeLst(first)/2; j++)
             {
                 if(last.GetValue() < pos.GetValue())
                 {
@@ -113,5 +113,16 @@ public class Program
         }
         return true;
     }
-
+    public static bool CheckInRange(Node<BagrutListLab.Ranges> first, int num)
+    {
+        Node<BagrutListLab.Ranges> pos = first;
+        while (pos != null)
+        {
+            if ((num > pos.GetValue().GetLow()) && (num < pos.GetValue().GetHigh()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
