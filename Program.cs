@@ -35,11 +35,14 @@ public class Program
         Console.WriteLine("is it perf: "+CheckPerfLst(lst2));
         Ranges r1 = new(1, 5);
         Ranges r2 = new(7, 10);
-        Ranges r3 = new(10, 15);
-        Node<BagrutListLab.Ranges> lst3 = new(r1);
+        Ranges r3 = new(11, 15);
+        Node<BagrutListLab.Ranges> lst3 = new(r3);
         lst3 = new(r2, lst3);
-        lst3 = new(r3, lst3);
-        Console.WriteLine("is"+8+"in the ranges: "+CheckInRange(lst3,8));
+        lst3 = new(r1, lst3);
+        Console.WriteLine("hi");
+        Console.WriteLine("is 8 in the ranges: "+CheckInRange(lst3,8));
+        CreateRangeForNum(lst3, -1);
+        Console.WriteLine(lst3);
     }
     public static int SumLinked(Node<int> first)
     {
@@ -135,7 +138,55 @@ public class Program
             {
                 return true;
             }
+            pos = pos.GetNext();
+
         }
         return false;
+    }
+    public static void CreateRangeForNum(Node<BagrutListLab.Ranges> first,int num)
+    {
+        Node<BagrutListLab.Ranges> pos=first;
+        while (num > pos.GetNext().GetValue().GetHigh())
+        {
+            pos = pos.GetNext();
+            if (!pos.HasNext())
+            {
+                break;
+            }
+        }
+        int upper;
+        if ((pos.HasNext()) && (pos.GetNext().GetValue().GetLow() > 5 + num))
+        {
+            upper = num + 5;
+        }
+        else if((pos.HasNext()) && (pos.GetNext().GetValue().GetLow() <= 5 + num))
+        {
+            upper = pos.GetNext().GetValue().GetLow()-1;
+        }
+        else 
+        {
+            upper = num + 5;
+        }
+        int lower;
+        if ((pos.HasNext()) && (pos.GetNext().GetValue().GetLow() < num-5))
+        {
+            lower = num -5;
+        }
+        else if ((pos.HasNext()) && (pos.GetNext().GetValue().GetLow() >= num-5))
+        {
+            lower = pos.GetNext().GetValue().GetLow()-1;
+        }
+        else 
+        {
+            lower = num - 5;
+        }
+        if(num<pos.GetValue().GetLow())
+        {
+            upper = pos.GetValue().GetLow() - 1;
+            lower = num - 5;
+        }
+        Ranges hadashR=new(lower,upper);
+        Node<BagrutListLab.Ranges> hadash = new(hadashR, pos.GetNext());
+        pos.SetNext(hadash);
     }
 }

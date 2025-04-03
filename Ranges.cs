@@ -10,7 +10,7 @@ namespace BagrutListLab
     {
         private int high;
         private int low;
-        public Ranges(int high, int low)
+        public Ranges(int low, int high)
         {
             this.high = high;
             this.low = low;
