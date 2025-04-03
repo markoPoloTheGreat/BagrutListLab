@@ -1,4 +1,5 @@
-﻿using ListLab;
+﻿using BagrutListLab;
+using ListLab;
 
 public class Program
 {
@@ -9,7 +10,7 @@ public class Program
         lst1 = currNode;
         currNode= new(8,lst1);
         lst1 = currNode;
-        currNode = new(2,lst1);
+        currNode = new(6,lst1);
         lst1 = currNode;
         currNode = new(5,lst1);
         lst1 = currNode;
@@ -25,8 +26,20 @@ public class Program
         lst1 = new(1, lst1);
         Console.WriteLine(lst1);
         Console.WriteLine("size is: "+ SizeLst(lst1));
-        Console.WriteLine("is it perf: "+CheckPerfLst(lst1));
-
+        Node<int> lst2 = new Node<int>(6);
+        lst2 = new(0, lst2);
+        lst2 = new(8, lst2);
+        lst2 = new(1, lst2);
+        lst2 = new(1, lst2);
+        lst2 = new(1, lst2);
+        Console.WriteLine("is it perf: "+CheckPerfLst(lst2));
+        Ranges r1 = new(1, 5);
+        Ranges r2 = new(7, 10);
+        Ranges r3 = new(10, 15);
+        Node<BagrutListLab.Ranges> lst3 = new(r1);
+        lst3 = new(r2, lst3);
+        lst3 = new(r3, lst3);
+        Console.WriteLine("is"+8+"in the ranges: "+CheckInRange(lst3,8));
     }
     public static int SumLinked(Node<int> first)
     {
@@ -118,7 +131,7 @@ public class Program
         Node<BagrutListLab.Ranges> pos = first;
         while (pos != null)
         {
-            if ((num > pos.GetValue().GetLow()) && (num < pos.GetValue().GetHigh()))
+            if ((num >= pos.GetValue().GetLow()) && (num <= pos.GetValue().GetHigh()))
             {
                 return true;
             }

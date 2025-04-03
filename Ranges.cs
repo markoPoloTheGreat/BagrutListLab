@@ -23,5 +23,10 @@ namespace BagrutListLab
         {
             return low;
         }
+        public override string ToString()
+        {
+            string str="["+this.low+","+this.high+"]";
+            return str;
+        }
     }
 }
