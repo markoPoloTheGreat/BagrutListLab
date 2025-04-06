@@ -34,15 +34,22 @@ public class Program
         lst2 = new(1, lst2);
         Console.WriteLine("is it perf: "+CheckPerfLst(lst2));
         Ranges r1 = new(1, 5);
-        Ranges r2 = new(7, 10);
+        Ranges r2 = new(8, 10);
         Ranges r3 = new(11, 15);
         Node<BagrutListLab.Ranges> lst3 = new(r3);
         lst3 = new(r2, lst3);
         lst3 = new(r1, lst3);
         Console.WriteLine("hi");
         Console.WriteLine("is 8 in the ranges: "+CheckInRange(lst3,8));
-        CreateRangeForNum(lst3, -1);
+        CreateRangeForNum(lst3, 6);
         Console.WriteLine(lst3);
+        Node<int> lst4 = null;
+        Console.WriteLine(InsertSortedList(lst4, 7));
+        Student s1 = new(92, "lya m");
+        Student s2 = new(98, "liya bt");
+        Student s3 = new(45, "lior");
+        Student s4 = new(20, " sex");
+
     }
     public static int SumLinked(Node<int> first)
     {
@@ -84,16 +91,22 @@ public class Program
         return biggest;
 
     }
-    public static void InsertSortedList(Node<int> first,int hadash)
+    public static Node<int> InsertSortedList(Node<int> lst, int hadash)
     {
-        Node<int> pos= first;
-        Node<int> insert = new(hadash);
-        while (pos.GetNext().GetValue() < insert.GetValue())
+        Node<int> newNode = new(hadash);
+        if (lst == null || lst.GetValue() > newNode.GetValue())
         {
-            pos = pos.GetNext();
+            newNode.SetNext(lst);
+            return newNode;
         }
-        insert.SetNext(pos.GetNext());
-        pos.SetNext(insert);
+        Node<int> currNode = lst;
+        while (currNode.HasNext() && currNode.GetNext().GetValue() < newNode.GetValue())
+        {
+            currNode = currNode.GetNext();
+        }
+        newNode.SetNext(currNode.GetNext());
+        currNode.SetNext(newNode);
+        return lst;
     }
     public static int SizeLst(Node<int> first)
     {
@@ -129,7 +142,7 @@ public class Program
         }
         return true;
     }
-    public static bool CheckInRange(Node<BagrutListLab.Ranges> first, int num)
+    public static bool CheckInRange(Node<Ranges> first, int num)
     {
         Node<BagrutListLab.Ranges> pos = first;
         while (pos != null)
@@ -188,5 +201,21 @@ public class Program
         Ranges hadashR=new(lower,upper);
         Node<BagrutListLab.Ranges> hadash = new(hadashR, pos.GetNext());
         pos.SetNext(hadash);
+    }
+    public static Node<Student> InsertInStudentList(Node<Student> lst, Node<Student> newNode)
+    {
+        if (lst == null || lst.GetValue().GetGrade() > newNode.GetValue().GetGrade())
+        {
+            newNode.SetNext(lst);
+            return newNode;
+        }
+        Node<Student> currNode = lst;
+        while (currNode.HasNext() && currNode.GetNext().GetValue().GetGrade() < newNode.GetValue().GetGrade())
+        {
+            currNode = currNode.GetNext();
+        }
+        newNode.SetNext(currNode.GetNext());
+        currNode.SetNext(newNode);
+        return lst;
     }
 }
